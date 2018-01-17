@@ -1,5 +1,6 @@
 # Neural-Network-cs
 This repository is a direct port from [Shiffman's Simple JS Neural Network](https://github.com/shiffman/Neural-Network-p5). Rewritten in c# and compiled to dll.
+> License extends that of the original repository by Daniel Shiffman. 
 
 # Use
 ```cs
@@ -48,4 +49,3 @@ var nn = new NeuralNetwork(inputs, hidden, outputs, "sigmoid");
 var nn = new NeuralNetwork(inputs, hidden, outputs, "tanh");
 ```
 
-> License extends that of the original repository by Daniel Shiffman. 
