@@ -22,12 +22,24 @@ namespace CSharpNeuralNetwork
             Rows = rows;
             Cols = cols;
             Values = new List<Double[]>();
-
+            
+            CreateValues(); 
+            
+            // Without "CreateValues" this will give an exception, because Values has no items in it
             ZeroValues();
+        }
+        
+        private void CreateValues()
+        {
+            for(int i = 0; i < Rows; i++)
+            {
+                Values.Add(new Double[Cols]);
+            }
         }
 
         public void ZeroValues()
         {
+ 
             for (int i = 0; i < Rows; i++)
             {
                 for(int j = 0; j < Cols; j++)
@@ -65,6 +77,8 @@ namespace CSharpNeuralNetwork
 
         public Matrix Transpose()
         {
+            
+            // Has problems.. Values gives out of bounds exception, which is logically because results.Rows is Values cols...
             var result = new Matrix(Cols, Rows);
 
             for(int i = 0; i < result.Rows; i++)
@@ -176,6 +190,9 @@ namespace CSharpNeuralNetwork
 
         public static Matrix MultiplyMatrices(Matrix first, Matrix second)
         {
+            
+            // Somewhere this will also return an error.. probably because of "for(int k = 0; *j* < first.Cols; k++)"
+            // For an better approach see https://pastebin.com/0dUuttDA all possiblities are handled _ 
             if(first.Cols != second.Rows)
             {
                 throw new Exception("Incompatible Matrix Size");
@@ -188,7 +205,7 @@ namespace CSharpNeuralNetwork
                 for(int j = 0; j < second.Cols; j++)
                 {
                     double sum = 0.0; 
-                    for(int k = 0; j < first.Cols; k++)
+                    for(int k = 0; j < first.Cols; k++) // why j?
                     {
                         sum += first.Values[i][k] * second.Values[k][j];
                     }
